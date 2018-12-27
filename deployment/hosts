@@ -1,0 +1,13 @@
+[raspberries]
+192.168.2.10 name=piMaster
+192.168.2.11 name=piWorker1
+192.168.2.12 name=piWorker2
+192.168.2.13 name=piWorker3
+
+[master]
+192.168.2.10
+
+[slaves]
+192.168.2.11
+192.168.2.12
+192.168.2.13

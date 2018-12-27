@@ -1,0 +1,6 @@
+---
+# Your timezone
+timezone: "Europe/Zurich"
+# Password for pi
+#user:
+#  password: "$1$abc$QP5oAKzOu6KWbcoBQV4KS1"
