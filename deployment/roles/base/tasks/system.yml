@@ -1,0 +1,24 @@
+- name: Set timezone
+  timezone: name="{{ timezone }}"
+
+- name: Update timezone
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+
+- name: Add hosts
+  template: src=hosts dest=/etc/hosts
+
+- name: Set hostname
+  hostname: name="{{ name }}"
+
+- name: Add useDns=no to /etc/ssh/sshd_config
+  lineinfile: dest=/etc/ssh/sshd_config state=present line="UseDNS no" insertafter="EOF"
+
+- name: Reload hostname
+  shell: "hostnamectl set-hostname {{ name }}"
+
+- name: System | Set gpu_mem to 16M
+  blockinfile:
+    dest: /boot/config.txt
+    block: |
+      # Set gpu_mem to minimum (16M)
+      gpu_mem=16

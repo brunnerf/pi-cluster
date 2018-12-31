@@ -1,3 +1,6 @@
 ---
 - name: Setup ssh access and user
   import_tasks: user.yml
+
+- name: Power Management
+  import_tasks: power_management.yml
