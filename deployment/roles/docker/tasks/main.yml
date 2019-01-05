@@ -1,0 +1,6 @@
+
+- name: Base | Install Docker
+  import_tasks: docker.yml
+
+- name: Reboot
+  import_tasks: reboot.yml

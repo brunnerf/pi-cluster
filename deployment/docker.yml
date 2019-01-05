@@ -1,0 +1,11 @@
+---
+- name: Setup Raspberry Pi Dockr
+  hosts: raspberries
+  gather_facts: yes
+  remote_user: pi
+  become: true
+  become_method: sudo
+  vars_files:
+    - config.yml
+  roles:
+    - docker

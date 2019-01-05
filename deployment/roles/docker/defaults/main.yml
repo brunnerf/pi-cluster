@@ -1,0 +1,5 @@
+docker:
+  # devicemapper or overlay2
+  storage_driver: overlay2
+  expose_tcp: true
+  version: "5:18.09.*"

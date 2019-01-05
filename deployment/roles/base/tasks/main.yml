@@ -4,3 +4,15 @@
 
 - name: Power Management
   import_tasks: power_management.yml
+
+- name: Setup system parameters (boot, hosts, timzone)
+  import_tasks: system.yml
+
+- name: Disable Swap
+  import_tasks: disable-swap.yml
+
+- name: Add and update packages
+  import_tasks: apt.yml
+
+- name: Reboot
+  import_tasks: reboot.yml
