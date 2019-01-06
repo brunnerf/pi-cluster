@@ -39,5 +39,5 @@
   lineinfile:
     path: /boot/cmdline.txt
     backrefs: true
-    regexp: '^(.*rootwait)$'
+    regexp: '^(.*plymouth.ignore-serial-consoles)$'
     line: '\1 cgroup_memory=1 cgroup_enable=memory'
