@@ -1,0 +1,11 @@
+- name: apt | Purge docker
+  command: apt-get purge -y docker-ce warn=False
+
+- name: Delete /var/lib/docker
+  file: path=/var/lib/docker state=absent
+
+- name: Delete /etc/docker/daemon.json
+  file: path=/etc/docker/daemon.json state=absent
+
+- name: Delete /lib/systemd/system/docker.service
+  file: path=/lib/systemd/system/docker.service state=absent

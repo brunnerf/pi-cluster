@@ -1,6 +1,11 @@
 - name: docker | Pin Docker to version {{ docker.version }} (the latest supported by Kubernetes)
   template: src=docker-apt-pin.txt dest=/etc/apt/preferences.d/docker
 
+- name: docker | install raspberry kernel headers
+  apt:
+    state: present
+    name: raspberrypi-kernel-headers
+
 - name: docker | Install Docker
   apt:
     state: present
@@ -40,4 +45,4 @@
     path: /boot/cmdline.txt
     backrefs: true
     regexp: '^(.*plymouth.ignore-serial-consoles)$'
-    line: '\1 cgroup_memory=1 cgroup_enable=memory'
+    line: '\1  cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
