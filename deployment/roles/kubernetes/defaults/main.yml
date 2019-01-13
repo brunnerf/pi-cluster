@@ -11,6 +11,6 @@ k8s:
   version: 1.13.1*
   # Timing is good for demos. Defaults are 5min eviction and 40s node grace period
   # TODO: Not yet put into the k8s configuration
-  pod_eviction_timeout: 60s
+  pod_eviction_timeout: 120s
   node_monitor_grace_period: 40s
 debug_level: 2
