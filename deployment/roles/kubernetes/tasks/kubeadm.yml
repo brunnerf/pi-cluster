@@ -1,5 +1,5 @@
 - name: kubeadm | Reset if requested
-  command: kubeadm reset
+  command: kubeadm reset -f
   when: reset
   tags:
     - reset
