@@ -1,3 +1,7 @@
+- name: remove weave
+  command: kubectl delete -f /etc/kubernetes/kube-weave.yml
+  become: no
+
 - name: kubeadm reset
   command: kubeadm reset -f
 
@@ -19,6 +23,15 @@
 
 - name: Delete /etc/kubernetes
   file: path=/etc/kubernetes state=absent
+
+- name: Delete /opt/cni/bin/weave-ipam
+  file: path=/opt/cni/bin/weave-ipam state=absent
+
+- name: Delete /opt/cni/bin/weave-net
+  file: path=/opt/cni/bin/weave-net state=absent
+
+- name: Delete /opt/cni/bin/weave-plugin-2.5.0
+  file: path=/opt/cni/bin/weave-plugin-2.5.0 state=absent
 
 - name: Reboot
   shell: sleep 2 && reboot

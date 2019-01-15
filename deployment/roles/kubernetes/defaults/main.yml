@@ -1,4 +1,4 @@
-reset: true
+reset: false
 overlay_network: weave
 network:
   service_subnet: 192.168.2.0/24
