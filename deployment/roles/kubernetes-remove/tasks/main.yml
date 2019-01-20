@@ -1,6 +1,7 @@
-- name: remove weave
+- name: Remove weave
   command: kubectl delete -f /etc/kubernetes/kube-weave.yml
   become: no
+  when: mode == "master"
 
 - name: kubeadm reset
   command: kubeadm reset -f

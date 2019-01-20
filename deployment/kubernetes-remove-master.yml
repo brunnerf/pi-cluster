@@ -1,14 +1,4 @@
 ---
-- name: Kubernetes Nodes
-
-  hosts: slaves
-  remote_user: pi
-  become: true
-
-  roles:
-  - role: kubernetes-remove
-    mode: slaves
-
 - name: Kubernetes Master
 
   hosts: master
