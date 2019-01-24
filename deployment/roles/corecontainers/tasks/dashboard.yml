@@ -1,0 +1,16 @@
+- name: Create dir /etc/kubernetes/apps/dashboard
+  file: path=/etc/kubernetes/apps/dashboard state=directory mode=0775
+
+- name: corecontainers | copy role config
+  template: src=cube-role.yml dest=/etc/kubernetes/apps/dashboard
+
+- name: corecontainers copy dashboard config
+  template: src=dashboard.yml dest=/etc/kubernetes/apps/dashboard
+
+- name: kubectl | apply tls disables version
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/dashboard/cube-role.yml
+
+- name: kubectl | load dashboard
+  become_user: pi
+  command: kubectl create -f /etc/kubernetes/apps/dashboard/dashboard.yml

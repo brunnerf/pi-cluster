@@ -1,0 +1,4 @@
+---
+- name: install dashboard
+  import_tasks: dashboard.yml
+  when: mode == "master"

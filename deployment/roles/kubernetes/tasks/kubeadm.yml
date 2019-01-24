@@ -4,7 +4,7 @@
   tags:
     - reset
 
-- name: kubeadm | Check for a running cluster
+- name: kubectl | Check for a running cluster
   command: kubectl get nodes
   become_user: pi
   register: kubectl_result
