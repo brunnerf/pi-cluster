@@ -1,0 +1,4 @@
+---
+- name: remove dashboard
+  import_tasks: dashboard-remove.yml
+  when: mode == "master"

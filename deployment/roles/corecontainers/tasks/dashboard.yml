@@ -7,7 +7,7 @@
 - name: corecontainers copy dashboard config
   template: src=dashboard.yml dest=/etc/kubernetes/apps/dashboard
 
-- name: kubectl | apply tls disables version
+- name: kubectl | apply tls disabled version
   become_user: pi
   command: kubectl apply -f /etc/kubernetes/apps/dashboard/cube-role.yml
 
