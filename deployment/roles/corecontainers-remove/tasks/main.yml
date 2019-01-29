@@ -1,4 +1,8 @@
 ---
-- name: remove dashboard
-  import_tasks: dashboard-remove.yml
+- name: remove metalb
+  import_tasks: metallb-remove.yml
   when: mode == "master"
+
+#- name: remove dashboard
+#  import_tasks: dashboard-remove.yml
+#  when: mode == "master"

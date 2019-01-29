@@ -1,4 +1,8 @@
 ---
-- name: install dashboard
-  import_tasks: dashboard.yml
+- name: install metallb
+  import_tasks: metallb.yml
   when: mode == "master"
+
+#- name: install dashboard
+#  import_tasks: dashboard.yml
+#  when: mode == "master"

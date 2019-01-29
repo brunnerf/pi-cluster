@@ -1,0 +1,16 @@
+- name: Create dir /etc/kubernetes/apps/metallb
+  file: path=/etc/kubernetes/apps/metallb state=directory mode=0775
+
+- name: corecontainers | copy metallb
+  template: src=metallb.yml dest=/etc/kubernetes/apps/metallb
+
+- name: corecontainers copy metallb config
+  template: src=metallb-conf.yml dest=/etc/kubernetes/apps/metallb
+
+- name: kubectl | apply metallb
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/metallb/metallb.yml
+
+- name: kubectl | apply layer2 metallb
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/metallb/metallb-conf.yml
