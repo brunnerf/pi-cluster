@@ -1,0 +1,11 @@
+---
+#nfs_exports: ["/mnt/pidrive1/kube 192.168.2.*(rw,sync,no_subtree_check,no_root_squash) \
+#192.168.178.*(rw,sync,no_subtree_check,no_root_squash)"]
+nfs_disk_mount: /mnt/pidrive1
+nfs_disk_label: PiDrive1
+nfs_exports: ["/mnt/pidrive1/kube 192.168.2.0/24(rw,sync,no_subtree_check,no_root_squash) \
+192.168.178.0/24(rw,sync,no_subtree_check,no_root_squash) \
+192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)"]
+
+nfs_rpcbind_state: started
+nfs_rpcbind_enabled: true

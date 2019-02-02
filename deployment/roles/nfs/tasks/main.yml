@@ -1,0 +1,37 @@
+---
+
+- name: Mount up device by label
+  mount:
+    path: /mnt/pidrive1
+    src: LABEL=PiDrive1
+    fstype: ext4
+    state: mounted
+  when: mode == "master"
+
+- name: Install nfs server package
+  apt:
+    name: ['nfs-common', 'nfs-kernel-server']
+    state: present
+    force: yes
+  when: mode == "master"
+
+- name: Ensure directories to export exist
+  file: 'path="{{ item.strip().split()[0] }}" state=directory'
+  with_items: "{{ nfs_exports }}"
+  when: mode == "master"
+
+- name: Copy exports file
+  template:
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload nfs
+  when: mode == "master"
+
+- name: Ensure nfs is running
+  service:
+    name: nfs-kernel-server
+    state: started
+  when: mode == "master" and nfs_exports|length
