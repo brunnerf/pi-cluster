@@ -1,0 +1,7 @@
+- name: nfs | delete test pod
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/nfs/test/nfs-test-pod.yml
+
+- name: nfs | delete test claim
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/nfs/test/nfs-test-claim.yml

@@ -3,8 +3,12 @@
 #  import_tasks: metallb-remove.yml
 #  when: mode == "master"
 
+#- name: remove nfs
+#  import_tasks: nfs-remove.yml
+#  when: mode == "master"
+
 - name: remove nfs
-  import_tasks: nfs-remove.yml
+  import_tasks: nfs-test-remove.yml
   when: mode == "master"
 
 #- name: remove dashboard
