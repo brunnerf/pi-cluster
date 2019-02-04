@@ -2,8 +2,8 @@
 
 - name: Mount up device by label
   mount:
-    path: /mnt/pidrive1
-    src: LABEL=PiDrive1
+    path: {{nfs_disk_mount}}
+    src: LABEL={{nfs_disk_label}}
     fstype: ext4
     state: mounted
   when: mode == "master"
