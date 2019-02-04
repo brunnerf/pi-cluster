@@ -1,6 +1,10 @@
 ---
-- name: remove metalb
-  import_tasks: metallb-remove.yml
+#- name: remove metalb
+#  import_tasks: metallb-remove.yml
+#  when: mode == "master"
+
+- name: remove nfs
+  import_tasks: nfs-remove.yml
   when: mode == "master"
 
 #- name: remove dashboard

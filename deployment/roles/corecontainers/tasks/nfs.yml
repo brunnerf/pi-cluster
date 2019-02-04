@@ -1,0 +1,30 @@
+- name: Create dir /etc/kubernetes/apps/nfs
+  file: path=/etc/kubernetes/apps/nfs state=directory mode=0775
+
+- name: nfs | copy namespace definition
+  template: src=nfs-namespace.yml dest=/etc/kubernetes/apps/nfs
+
+- name: nfs | copy role defintion
+  template: src=nfs-role.yml dest=/etc/kubernetes/apps/nfs
+
+- name: nfs | copy storagelass
+  template: src=nfs-storageclass.yml dest=/etc/kubernetes/apps/nfs
+
+- name: nfs | copy delpoyment
+  template: src=nfs-deployment.yml dest=/etc/kubernetes/apps/nfs
+
+- name: nfs | define namespace
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/nfs/nfs-namespace.yml
+
+- name: nfs | define role
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/nfs/nfs-role.yml
+
+- name: nfs | define storagelass
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/nfs/nfs-storageclass.yml
+
+- name: nfs | deploy storageclass provider
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/nfs/nfs-deployment.yml

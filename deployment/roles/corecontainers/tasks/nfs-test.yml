@@ -1,0 +1,16 @@
+- name: Create dir /etc/kubernetes/apps/nfs/test
+  file: path=/etc/kubernetes/apps/nfs/test state=directory mode=0775
+
+- name: nfs | copy test claim
+  template: src=nfs-test-claim.yml dest=/etc/kubernetes/apps/nfs/test
+
+- name: nfs | copy test pod configuration
+  template: src=nfs-test-pod.yml dest=/etc/kubernetes/apps/nfs/test
+
+- name: nfs | apply test claim
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/nfs/test/nfs-test-claim.yml
+
+- name: nfs | start test pod
+  become_user: pi
+  command: kubectl create -f /etc/kubernetes/apps/nfs/test/nfs-test-pod.yml
