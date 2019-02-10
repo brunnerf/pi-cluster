@@ -1,14 +1,18 @@
 ---
-#- name: install metallb
-#  import_tasks: metallb.yml
-#  when: mode == "master"
-
-- name: install nfs support
-  import_tasks: nfs.yml
+- name: install metallb
+  import_tasks: metallb.yml
   when: mode == "master"
 
-- name: test nfs support
-  import_tasks: nfs-test.yml
+#- name: install nfs support
+#  import_tasks: nfs.yml
+#  when: mode == "master"
+
+#- name: test nfs support
+#  import_tasks: nfs-test.yml
+#  when: mode == "master"
+
+- name: traefik internal
+  import_tasks: traefik-internal.yml
   when: mode == "master"
 
 #- name: install dashboard

@@ -1,0 +1,31 @@
+---
+- name: Create dir /etc/kubernetes/apps/traefik
+  file: path=/etc/kubernetes/apps/traefik state=directory mode=0775
+
+- name: traefik | copy role definition
+  template: src=traefik-role.yml dest=/etc/kubernetes/apps/traefik
+
+- name: traefik | copy configmap definition
+  template: src=traefik-internal-configmap.yml dest=/etc/kubernetes/apps/traefik
+
+- name: traefik | copy deployment definition
+  template: src=traefik-internal-deployment.yml dest=/etc/kubernetes/apps/traefik
+
+- name: traefik | copy service definition
+  template: src=traefik-internal-service.yml dest=/etc/kubernetes/apps/traefik
+
+- name: traefik | apply role
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/traefik/traefik-role.yml
+
+- name: traefik | apply internal traefik configmap
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/traefik/traefik-internal-configmap.yml
+
+- name: traefik | apply internal traefik service
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/traefik/traefik-internal-service.yml
+
+- name: traefik | apply internal traefik deployment
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/traefik/traefik-internal-deployment.yml
