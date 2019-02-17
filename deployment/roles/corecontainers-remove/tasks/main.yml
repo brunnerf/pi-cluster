@@ -1,7 +1,7 @@
 ---
-- name: remove metalb
-  import_tasks: metallb-remove.yml
-  when: mode == "master"
+#- name: remove metalb
+#  import_tasks: metallb-remove.yml
+#  when: mode == "master"
 
 #- name: remove nfs
 #  import_tasks: nfs-remove.yml
@@ -10,6 +10,10 @@
 #- name: remove nfs
 #  import_tasks: nfs-test-remove.yml
 #  when: mode == "master"
+
+- name:  remove consul
+  import_tasks: consul-remove.yml
+  when: mode == "master"
 
 #- name: remove traefik internal
 #  import_tasks: traefik-internal-remove.yml

@@ -1,0 +1,19 @@
+- name: kubectl | remove client daemonset
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/consul/consul-client-daemonset.yml
+
+- name: kubectl | remove client configmap
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/consul/consul-client-configmap.yml
+
+- name: kubectl | delete server service
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/consul/consul-server-service.yml
+
+- name: kubectl | delete server stafeful set
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/consul/consul-server-statefulset.yml
+
+- name: kubectl | delete server configmap
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/consul/consul-server-configmap.yml

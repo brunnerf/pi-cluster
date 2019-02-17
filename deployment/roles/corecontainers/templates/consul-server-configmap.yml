@@ -1,0 +1,17 @@
+---
+# Source: consul/templates/server-config-configmap.yaml
+# StatefulSet to run the actual Consul server cluster.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kreis3-consul-server-config
+  labels:
+    app: consul
+    chart: consul-0.1.0
+    heritage: Tiller
+    release: kreis3
+data:
+  extra-from-values.json: |-
+    {}
+    
+

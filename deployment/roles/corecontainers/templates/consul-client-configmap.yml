@@ -1,0 +1,18 @@
+---
+# Source: consul/templates/client-config-configmap.yaml
+# ConfigMap with extra configuration specified directly to the chart
+# for client agents only.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kreis3-consul-client-config
+  labels:
+    app: consul
+    chart: consul-0.1.0
+    heritage: Tiller
+    release: kreis3
+data:
+  extra-from-values.json: |-
+    {}
+    
+
