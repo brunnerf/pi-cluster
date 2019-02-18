@@ -6,6 +6,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: kreis3-consul-client-config
+  namespace: kube-system
   labels:
     app: consul
     chart: consul-0.1.0
@@ -14,5 +15,3 @@ metadata:
 data:
   extra-from-values.json: |-
     {}
-    
-

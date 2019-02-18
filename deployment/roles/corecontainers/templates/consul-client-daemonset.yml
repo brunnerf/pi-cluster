@@ -5,6 +5,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: kreis3-consul
+  namespace: kube-system
   labels:
     app: consul
     chart: consul-0.1.0
