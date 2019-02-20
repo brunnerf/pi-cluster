@@ -1,0 +1,16 @@
+- name: Create dir /etc/kubernetes/apps/traefik-external
+  file: path=/etc/kubernetes/apps/traefik-external state=directory mode=0775
+
+- name: traefik-external | copy configmap
+  template: src=traefik-external-configmap.yml dest=/etc/kubernetes/apps/traefik-external
+
+- name: traefik-external | copy key value job
+  template: src=traefik-external-storekv.yml dest=/etc/kubernetes/apps/traefik-external
+
+- name: traefik-external | apply configmap
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/traefik-external/traefik-external-configmap.yml
+
+- name: traefik-external | store config in key-value store
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/traefik-external/traefik-external-storekv.yml

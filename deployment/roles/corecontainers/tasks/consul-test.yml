@@ -1,0 +1,10 @@
+- name: Create dir /etc/kubernetes/apps/consul/test
+  file: path=/etc/kubernetes/apps/consul/test state=directory mode=0775
+
+
+- name: consul-test | copy test pod configuration
+  template: src=consul-test.yml dest=/etc/kubernetes/apps/consul/test
+
+- name: consul-test | apply test pod configuration
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/consul/test/consul-test.yml

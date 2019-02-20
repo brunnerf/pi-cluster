@@ -1,0 +1,3 @@
+- name: kubectl | remove deployment
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/consul/test/consul-test.yml
