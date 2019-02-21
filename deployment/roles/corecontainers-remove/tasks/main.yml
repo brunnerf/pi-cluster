@@ -11,13 +11,13 @@
 #  import_tasks: nfs-test-remove.yml
 #  when: mode == "master"
 
-#- name:  remove consul
-#  import_tasks: consul-remove.yml
-#  when: mode == "master"
-
-- name:  remove consul test
-  import_tasks: consul-test-remove.yml
+- name:  remove consul
+  import_tasks: consul-remove.yml
   when: mode == "master"
+
+#- name:  remove consul test
+#  import_tasks: consul-test-remove.yml
+#  when: mode == "master"
 
 #- name: remove traefik internal
 #  import_tasks: traefik-internal-remove.yml

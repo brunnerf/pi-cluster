@@ -7,31 +7,38 @@
 - name: core containers | copy consul server statefulset
   template: src=consul-server-statefulset.yml dest=/etc/kubernetes/apps/consul
 
-- name: core containers | copy consul server configmap
+- name: core containers | copy consul server service
   template: src=consul-server-service.yml dest=/etc/kubernetes/apps/consul
 
-- name: core containers | copy consul client configmap
-  template: src=consul-client-configmap.yml dest=/etc/kubernetes/apps/consul
+- name: core containers | copy consul ui service
+  template: src=consul-ui-service.yml dest=/etc/kubernetes/apps/consul
 
-- name: core containers | copy consul server configmap
-  template: src=consul-client-daemonset.yml dest=/etc/kubernetes/apps/consul
+#- name: core containers | copy consul client configmap
+#  template: src=consul-client-configmap.yml dest=/etc/kubernetes/apps/consul
 
-- name: kubectl | apply server configmap
+#- name: core containers | copy consul daemonset
+#  template: src=consul-client-daemonset.yml dest=/etc/kubernetes/apps/consul
+
+- name: kubectl | apply consul server configmap
   become_user: pi
   command: kubectl apply -f /etc/kubernetes/apps/consul/consul-server-configmap.yml
 
-- name: kubectl | apply server stafeful set
+- name: kubectl | apply consul server stafeful set
   become_user: pi
   command: kubectl apply -f /etc/kubernetes/apps/consul/consul-server-statefulset.yml
 
-- name: kubectl | apply server service
+- name: kubectl | apply consul server service
   become_user: pi
   command: kubectl apply -f /etc/kubernetes/apps/consul/consul-server-service.yml
 
-- name: kubectl | apply client configmap
+- name: kubectl | apply consul ui service
   become_user: pi
-  command: kubectl apply -f /etc/kubernetes/apps/consul/consul-client-configmap.yml
+  command: kubectl apply -f /etc/kubernetes/apps/consul/consul-ui-service.yml
 
-- name: kubectl | apply client daemonset
-  become_user: pi
-  command: kubectl apply -f /etc/kubernetes/apps/consul/consul-client-daemonset.yml
+#- name: kubectl | apply client configmap
+#  become_user: pi
+#  command: kubectl apply -f /etc/kubernetes/apps/consul/consul-client-configmap.yml
+
+#- name: kubectl | apply client daemonset
+#  become_user: pi
+#  command: kubectl apply -f /etc/kubernetes/apps/consul/consul-client-daemonset.yml

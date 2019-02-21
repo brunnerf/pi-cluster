@@ -77,6 +77,7 @@ spec:
                 -data-dir=/consul/data \
                 -domain=consul \
                 -hcl="connect { enabled = true }" \
+                -ui \
                 -retry-join=${CONSUL_FULLNAME}-server-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
                 -retry-join=${CONSUL_FULLNAME}-server-1.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
                 -retry-join=${CONSUL_FULLNAME}-server-2.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \

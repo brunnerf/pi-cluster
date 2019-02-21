@@ -1,0 +1,41 @@
+---
+# Source: consul/templates/ui-service.yaml
+# Headless service for Consul server DNS entries. This service should only
+# point to Consul servers. For access to an agent, one should assume that
+# the agent is installed locally on the node and the NODE_IP should be used.
+# If the node can't run a Consul agent, then this service can be used to
+# communicate directly to a server agent.
+apiVersion: v1
+kind: Service
+metadata:
+  name: kreis3-consul-ui
+  namespace: kube-system
+  labels:
+    app: consul
+    chart: consul-0.1.0
+    heritage: Tiller
+    release: kreis3
+spec:
+  selector:
+    app: consul
+    release: "kreis3"
+    component: server
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8500
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: consul-ingress-lb
+  namespace: kube-system
+spec:
+  rules:
+  - host: consul.cube.kreis3.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kreis3-consul-ui
+          servicePort: 80

@@ -15,17 +15,17 @@
 #  import_tasks: traefik-internal.yml
 #  when: mode == "master"
 
-#- name:  consul
-#  import_tasks: consul.yml
-#  when: mode == "master"
+- name:  consul
+  import_tasks: consul.yml
+  when: mode == "master"
 
-#- name:  consul
+#- name:  consul test
 #  import_tasks: consul-test.yml
 #  when: mode == "master"
 
-- name: traefik external store-kv
-  import_tasks: traefik-external-storekv.yml
-  when: mode == "master"
+#- name: traefik external store-kv
+#  import_tasks: traefik-external-storekv.yml
+#  when: mode == "master"
 
 #- name: install dashboard
 #  import_tasks: dashboard.yml
