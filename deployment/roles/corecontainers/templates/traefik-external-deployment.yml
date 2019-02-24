@@ -1,12 +1,12 @@
+---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: traefik-ingress-controller-external
   namespace: kube-system
   labels:
     k8s-app: traefik-ingress-lb-external
 spec:
-  serviceName: traefik-ingress-lb-external
   replicas: 2
   selector:
     matchLabels:
@@ -35,7 +35,7 @@ spec:
       #    mountPath: /etc/traefik
       #    readOnly: true
       containers:
-      - image: traefik:v1.7.8
+      - image: traefik:v1.7.9
         name: traefik-ingress-lb
         ports:
          - name: http
@@ -44,9 +44,12 @@ spec:
            containerPort: 443
          - name: admin
            containerPort: 8080
-        args:
-        - --api
-        - --configfile=/config/traefik.toml
+        args: ["--api", "--kubernetes", "-c", "/config/traefik.toml", "--consul.endpoint=kreis3-consul-server:8500" ]
+        env:
+          - name: CF_API_EMAIL
+            value: "xyz"
+          - name: CF_API_KEY
+            value: "xyz"
         livenessProbe:
           httpGet:
             path: /health

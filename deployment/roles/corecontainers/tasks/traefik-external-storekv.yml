@@ -16,7 +16,7 @@
   command: kubectl apply -f /etc/kubernetes/apps/traefik-external/traefik-external-storekv.yml
 
 - pause:
-    seconds: 30
+    minutes: 3
 
 - name: traefik-external kv | remove job
   become_user: pi

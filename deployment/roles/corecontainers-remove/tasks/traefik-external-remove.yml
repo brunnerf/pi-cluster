@@ -1,0 +1,11 @@
+- name: traefik external | remove external traefik deployment
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/traefik-external/traefik-external-deployment.yml
+
+- name: traefik external | delete external traefik service
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/traefik-external/traefik-external-service.yml
+
+- name: traefik external | delete external traefik configmap
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/traefik-external/traefik-external-configmap.yml

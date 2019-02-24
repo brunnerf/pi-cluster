@@ -1,31 +1,43 @@
 ---
-#- name: install metallb
-#  import_tasks: metallb.yml
-#  when: mode == "master"
+- name: install metallb
+  import_tasks: metallb.yml
+  when: mode == "master"
+  tags: metallb
 
-#- name: install nfs support
-#  import_tasks: nfs.yml
-#  when: mode == "master"
+- name: install nfs support
+  import_tasks: nfs.yml
+  when: mode == "master"
+  tags: nfs
 
 #- name: test nfs support
 #  import_tasks: nfs-test.yml
 #  when: mode == "master"
+#  tags: nfs-test
 
-#- name: traefik internal
-#  import_tasks: traefik-internal.yml
-#  when: mode == "master"
-
-- name:  consul
-  import_tasks: consul.yml
+- name: traefik internal
+  import_tasks: traefik-internal.yml
   when: mode == "master"
+  tags: traefik-internal
 
 #- name:  consul test
 #  import_tasks: consul-test.yml
 #  when: mode == "master"
+#  tags: consul-test
 
-#- name: traefik external store-kv
-#  import_tasks: traefik-external-storekv.yml
-#  when: mode == "master"
+- name:  consul
+  import_tasks: consul.yml
+  when: mode == "master"
+  tags: traefik-internal
+
+- name: traefik external store-kv
+  import_tasks: traefik-external-storekv.yml
+  when: mode == "master"
+  tags: traefik-external-kv
+
+- name: traefik external
+  import_tasks: traefik-external.yml
+  when: mode == "master"
+  tags: traefik-external
 
 #- name: install dashboard
 #  import_tasks: dashboard.yml

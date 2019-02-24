@@ -39,3 +39,20 @@ spec:
         backend:
           serviceName: traefik-ingress-service-external
           servicePort: admin
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-ingress-lb-external-open
+  namespace: kube-system
+  labels:
+    traffic-type: external
+spec:
+  rules:
+  - host: traefik.kube.kreis3.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: traefik-ingress-service-external
+          servicePort: admin

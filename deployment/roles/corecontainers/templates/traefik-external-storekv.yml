@@ -3,7 +3,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: traefik-kv-store
-  namespace: kube-system  
+  namespace: kube-system
 spec:
   backoffLimit: 3
   activeDeadlineSeconds: 100
@@ -18,9 +18,10 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
-        image: traefik:v1.7.8
+        image: traefik:v1.7.9
         imagePullPolicy: IfNotPresent
-        args: ["storeconfig", "-c", "/config/traefik.toml", "--consul.endpoint=$(HOST_IP):8500" ]
+        #args: ["storeconfig", "-c", "/config/traefik.toml", "--consul.endpoint=$(HOST_IP):8500" ]
+        args: ["storeconfig", "-c", "/config/traefik.toml", "--consul.endpoint=kreis3-consul-server:8500" ]
         volumeMounts:
         - name: config
           mountPath: /etc/traefik
