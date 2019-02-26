@@ -30,6 +30,8 @@ kind: Ingress
 metadata:
   name: consul-ingress-lb
   namespace: kube-system
+  labels:
+    traffic-type: internal
 spec:
   rules:
   - host: consul.cube.kreis3.com

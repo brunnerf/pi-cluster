@@ -22,10 +22,10 @@
   become_user: pi
   command: kubectl apply -f /etc/kubernetes/apps/traefik/traefik-internal-configmap.yml
 
-- name: traefik | apply internal traefik service
-  become_user: pi
-  command: kubectl apply -f /etc/kubernetes/apps/traefik/traefik-internal-service.yml
-
 - name: traefik | apply internal traefik deployment
   become_user: pi
   command: kubectl apply -f /etc/kubernetes/apps/traefik/traefik-internal-deployment.yml
+
+- name: traefik | apply internal traefik service
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/traefik/traefik-internal-service.yml

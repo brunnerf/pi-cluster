@@ -14,10 +14,10 @@
   become_user: pi
   command: kubectl apply -f /etc/kubernetes/apps/traefik-external/traefik-external-configmap.yml
 
+- name: traefik-external | apply deployment
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/traefik-external/traefik-external-deployment.yml
+
 - name: traefik-external | apply service
   become_user: pi
   command: kubectl apply -f /etc/kubernetes/apps/traefik-external/traefik-external-service.yml
-
-- name: traefik-external | apply statefulset
-  become_user: pi
-  command: kubectl apply -f /etc/kubernetes/apps/traefik-external/traefik-external-deployment.yml

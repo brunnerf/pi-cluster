@@ -1,7 +1,8 @@
 ---
-#- name: remove dashboard
-#  import_tasks: dashboard-remove.yml
-#  when: mode == "master"
+- name: remove dashboard
+  import_tasks: dashboard-remove.yml
+  when: mode == "master"
+  tags: dashboard
 
 - name: remove traefik external
   import_tasks: traefik-external-remove.yml

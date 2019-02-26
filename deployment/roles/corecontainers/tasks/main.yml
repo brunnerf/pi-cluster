@@ -39,6 +39,7 @@
   when: mode == "master"
   tags: traefik-external
 
-#- name: install dashboard
-#  import_tasks: dashboard.yml
-#  when: mode == "master"
+- name: dashboard
+  import_tasks: dashboard.yml
+  when: mode == "master"
+  tags: dashboard

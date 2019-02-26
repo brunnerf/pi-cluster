@@ -2,15 +2,22 @@
   file: path=/etc/kubernetes/apps/dashboard state=directory mode=0775
 
 - name: dashboard | copy role config
-  template: src=cube-role.yml dest=/etc/kubernetes/apps/dashboard
+  template: src=dashboard-role.yml dest=/etc/kubernetes/apps/dashboard
 
 - name: dashboard | copy config
-  template: src=dashboard.yml dest=/etc/kubernetes/apps/dashboard
+  template: src=dashboard-deployment.yml dest=/etc/kubernetes/apps/dashboard
+
+- name: dashboard | copy ingress
+  template: src=dashboard-ingress.yml dest=/etc/kubernetes/apps/dashboard
 
 - name: kubectl | apply tls disabled dashboard version
   become_user: pi
-  command: kubectl apply -f /etc/kubernetes/apps/dashboard/cube-role.yml
+  command: kubectl apply -f /etc/kubernetes/apps/dashboard/dashboard-role.yml
 
 - name: kubectl | load dashboard
   become_user: pi
-  command: kubectl create -f /etc/kubernetes/apps/dashboard/dashboard.yml
+  command: kubectl create -f /etc/kubernetes/apps/dashboard/dashboard-deployment.yml
+
+- name: kubectl | load dashboard internal ingress
+  become_user: pi
+  command: kubectl create -f /etc/kubernetes/apps/dashboard/dashboard-ingress.yml

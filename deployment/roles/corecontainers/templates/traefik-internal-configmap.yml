@@ -31,6 +31,8 @@ data:
     [web]
       address = ":8080"
     [kubernetes]
+      # Only create ingresses where the object has traffic-type: internal label
+      labelselector = "traffic-type=internal"
     [metrics]
       [metrics.prometheus]
       buckets=[0.1,0.3,1.2,5.0]

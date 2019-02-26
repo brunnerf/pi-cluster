@@ -4,4 +4,8 @@
 
 - name: kubectl | remove dashboard
   become_user: pi
-  command: kubectl delete -f /etc/kubernetes/apps/dashboard/cube-role.yml
+  command: kubectl delete -f /etc/kubernetes/apps/dashboard/dashboard-role.yml
+
+- name: kubectl | remove dashboard
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/dashboard/dashboard-ingress.yml

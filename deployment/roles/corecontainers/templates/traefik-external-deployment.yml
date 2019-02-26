@@ -44,12 +44,12 @@ spec:
            containerPort: 443
          - name: admin
            containerPort: 8080
-        args: ["--api", "--kubernetes", "-c", "/config/traefik.toml", "--consul.endpoint=kreis3-consul-server:8500" ]
+        args: ["--api", "-c", "/config/traefik.toml", "--consul.endpoint=kreis3-consul-server:8500" ]
         env:
           - name: CF_API_EMAIL
-            value: "xyz"
+            value: "x"
           - name: CF_API_KEY
-            value: "xyz"
+            value: "x"
         livenessProbe:
           httpGet:
             path: /health
