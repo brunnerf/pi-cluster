@@ -47,9 +47,9 @@ spec:
         args: ["--api", "-c", "/config/traefik.toml", "--consul.endpoint=kreis3-consul-server:8500" ]
         env:
           - name: CF_API_EMAIL
-            value: "x"
+            value: {{cf_api_email}}
           - name: CF_API_KEY
-            value: "x"
+            value: {{cf_api_key}}
         livenessProbe:
           httpGet:
             path: /health

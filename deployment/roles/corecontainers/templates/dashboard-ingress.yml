@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -10,6 +11,29 @@ metadata:
 spec:
   rules:
   - host: cube.kreis3.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kubernetes-dashboard
+          servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kubernetes-dashboard-exernal
+  namespace: kube-system
+  annotations:
+  annotations:
+    ingress.kubernetes.io/auth-type: basic
+    # name of the secret that contains the user/password definitions
+    ingress.kubernetes.io/auth-secret: kube-user
+    traefik.frontend.rule.type: PathPrefix
+  labels:
+    traffic-type: external
+spec:
+  rules:
+  - host: kube.kreis3.com
     http:
       paths:
       - path: /
