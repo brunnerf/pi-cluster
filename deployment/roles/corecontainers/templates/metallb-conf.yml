@@ -5,8 +5,12 @@ metadata:
   name: config
 data:
   config: |
+    peers:
+    - peer-address: 192.168.2.1
+      peer-asn: 64512
+      my-asn: 64512
     address-pools:
     - name: default
       protocol: layer2
       addresses:
-      - 192.168.2.200-192.168.2.240
+      - 192.168.2.200-192.168.2.210

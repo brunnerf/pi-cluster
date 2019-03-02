@@ -32,7 +32,7 @@
 - name:  consul
   import_tasks: consul.yml
   when: mode == "master"
-  tags: traefik-internal
+  tags: consul
 
 - name: traefik external store-kv
   import_tasks: traefik-external-storekv.yml
