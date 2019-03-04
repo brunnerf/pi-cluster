@@ -1,0 +1,23 @@
+- name: kubectl | delete  metrics api server
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/metrics-server/metrics-api-service.yml
+
+- name: kubectl | delete  metrics server service
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/metrics-server/metrics-server-service.yml
+
+- name: kubectl | delete metrics server deployment
+  become_user: pi
+  command: kubectl delete  -f /etc/kubernetes/apps/metrics-server/metrics-server-deployment.yml
+
+- name: kubectl | delete metrics resource reader role
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/metrics-server/metrics-resource-reader.yml
+
+- name: kubectl | delete metrics aggregated reader role
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/metrics-server/aggregated-metrics-reader.yml
+
+- name: kubectl | delete metrics reader role
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/metrics-server/metrics-auth-reader.yml

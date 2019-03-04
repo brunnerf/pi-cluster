@@ -1,0 +1,44 @@
+- name: Create dir /etc/kubernetes/apps/metrics-server
+  file: path=/etc/kubernetes/apps/metrics-server state=directory mode=0775
+
+- name: metrics-server | copy reader role
+  template: src=metrics-auth-reader.yml dest=/etc/kubernetes/apps/metrics-server
+
+- name: metrics-server | copy aggregated reader role
+  template: src=aggregated-metrics-reader.yml dest=/etc/kubernetes/apps/metrics-server
+
+- name: metrics-server | copy resource reader role
+  template: src=metrics-resource-reader.yml dest=/etc/kubernetes/apps/metrics-server
+
+- name: metrics-server | copy server deployment
+  template: src=metrics-server-deployment.yml dest=/etc/kubernetes/apps/metrics-server
+
+- name: metrics-server | copy server service
+  template: src=metrics-server-service.yml dest=/etc/kubernetes/apps/metrics-server
+
+- name: metrics-server | copy api service
+  template: src=metrics-api-service.yml dest=/etc/kubernetes/apps/metrics-server
+
+- name: kubectl | apply metrics reader role
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/metrics-server/metrics-auth-reader.yml
+
+- name: kubectl | apply metrics aggregated reader role
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/metrics-server/aggregated-metrics-reader.yml
+
+- name: kubectl | apply metrics resource reader role
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/metrics-server/metrics-resource-reader.yml
+
+- name: kubectl | apply metrics server deployment
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/metrics-server/metrics-server-deployment.yml
+
+- name: kubectl | apply metrics server service
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/metrics-server/metrics-server-service.yml
+
+- name: kubectl | apply metrics api server
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/metrics-server/metrics-api-service.yml
