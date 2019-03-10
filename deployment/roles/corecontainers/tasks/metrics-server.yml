@@ -5,7 +5,10 @@
   template: src=metrics-auth-reader.yml dest=/etc/kubernetes/apps/metrics-server
 
 - name: metrics-server | copy aggregated reader role
-  template: src=aggregated-metrics-reader.yml dest=/etc/kubernetes/apps/metrics-server
+  template: src=metrics-aggregated-reader.yml dest=/etc/kubernetes/apps/metrics-server
+
+- name: metrics-server | copy resource reader role
+  template: src=metrics-auth-delegator.yml dest=/etc/kubernetes/apps/metrics-server
 
 - name: metrics-server | copy resource reader role
   template: src=metrics-resource-reader.yml dest=/etc/kubernetes/apps/metrics-server
@@ -25,11 +28,15 @@
 
 - name: kubectl | apply metrics aggregated reader role
   become_user: pi
-  command: kubectl apply -f /etc/kubernetes/apps/metrics-server/aggregated-metrics-reader.yml
+  command: kubectl apply -f /etc/kubernetes/apps/metrics-server/metrics-aggregated-reader.yml
 
 - name: kubectl | apply metrics resource reader role
   become_user: pi
   command: kubectl apply -f /etc/kubernetes/apps/metrics-server/metrics-resource-reader.yml
+
+- name: kubectl | apply metrics resource reader role
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/metrics-server/metrics-auth-delegator.yml
 
 - name: kubectl | apply metrics server deployment
   become_user: pi

@@ -14,9 +14,13 @@
   become_user: pi
   command: kubectl delete -f /etc/kubernetes/apps/metrics-server/metrics-resource-reader.yml
 
-- name: kubectl | delete metrics aggregated reader role
+- name: kubectl | delete metrics resource reader role
   become_user: pi
-  command: kubectl delete -f /etc/kubernetes/apps/metrics-server/aggregated-metrics-reader.yml
+  command: kubectl delete -f /etc/kubernetes/apps/metrics-server/metrics-aggregated-reader.yml
+
+- name: kubectl | delete metrics auth delegator
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/metrics-server/metrics-auth-delegator.yml
 
 - name: kubectl | delete metrics reader role
   become_user: pi

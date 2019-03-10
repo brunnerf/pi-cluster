@@ -3,4 +3,16 @@ kind: ClusterConfiguration
 #networking:
   #podSubnet: "{{ network.pod_subnet }}"
   #serviceSubnet: "{{ network.service_subnet }}"
-kubernetesVersion: "v1.13.1"
+kubernetesVersion: "v1.13.4"
+apiServer:
+  extraArgs:
+    #target-ram-mb: 120
+    max-requests-inflight: 100
+scheduler:
+  extraArgs:
+    leader-elect-lease-duration: 30s
+    leader-elect-renew-deadline: 25s
+controllerManager:
+  extraArgs:
+    leader-elect-lease-duration: 30s
+    leader-elect-renew-deadline: 25s
