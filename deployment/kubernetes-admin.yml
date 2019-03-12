@@ -1,0 +1,9 @@
+---
+- name: Kubernetes Admin jobs
+  hosts: master
+  remote_user: pi
+  become: true
+
+  roles:
+  - role: kubernetes-admin
+    mode: master

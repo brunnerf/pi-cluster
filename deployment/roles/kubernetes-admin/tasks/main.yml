@@ -1,0 +1,4 @@
+- name:  etcd-backup
+  import_tasks: etcd-backup.yml
+  when: mode == "master"
+  tags: etcd-backup
