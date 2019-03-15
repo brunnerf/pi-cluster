@@ -9,7 +9,7 @@
   command: kubectl apply -f /etc/kubernetes/apps/etcd-backup/etcd-backup.yml
 
 - pause:
-    minutes: 2
+    minutes: 1
 
 - name: backup | remove job
   become_user: pi

@@ -16,3 +16,6 @@ controllerManager:
   extraArgs:
     leader-elect-lease-duration: 30s
     leader-elect-renew-deadline: 25s
+etcd:
+  extraArgs:
+    data-dir: /mnt/pidrive1/kubernetes/etcd

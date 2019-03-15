@@ -2,3 +2,8 @@
   import_tasks: etcd-backup.yml
   when: mode == "master"
   tags: etcd-backup
+
+- name:  etcd-restore
+  import_tasks: etcd-restore.yml
+  when: mode == "master"
+  tags: etcd-restore

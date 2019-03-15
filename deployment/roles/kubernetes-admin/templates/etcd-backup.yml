@@ -38,5 +38,5 @@ spec:
           type: DirectoryOrCreate
       - name: backup
         hostPath:
-          path: /mnt/pidrive1/kubernetes/etcd/backup
+          path: /mnt/pidrive1/kubernetes/backup/etcd
           type: DirectoryOrCreate
