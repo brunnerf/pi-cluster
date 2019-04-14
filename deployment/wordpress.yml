@@ -1,0 +1,9 @@
+---
+- name: Wordpress
+  hosts: master
+  remote_user: pi
+  become: true
+
+  roles:
+  - role: wordpress
+    mode: master
