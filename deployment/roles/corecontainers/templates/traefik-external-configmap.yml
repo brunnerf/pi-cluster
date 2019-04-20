@@ -50,3 +50,5 @@ data:
     [[acme.domains]]
       main = "*.kube.kreis3.com"
       sans = ["kube.kreis3.com"]
+    [[acme.domains]]
+      main = "kreis3.com"
