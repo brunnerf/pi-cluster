@@ -1,0 +1,16 @@
+- name: wordpress| Create dir /etc/kubernetes/apps/wordpress
+  file: path=/etc/kubernetes/apps/wordpress state=directory mode=0775
+
+- name: wordpress | copy wordpress definition
+  template: src=wordpress.yml dest=/etc/kubernetes/apps/wordpress
+
+- name: wordpress | copy wordpress ingress
+  template: src=wordpress-ingress.yml dest=/etc/kubernetes/apps/wordpress
+
+- name: wordpress | load wordpress
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/wordpress/wordpress.yml
+
+- name: wordpress | load wordpress ingress
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/wordpress/wordpress-ingress.yml

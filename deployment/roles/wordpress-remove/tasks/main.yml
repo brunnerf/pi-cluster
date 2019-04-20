@@ -1,0 +1,5 @@
+---
+- name: remove mysql
+  import_tasks: mysql-remove.yml
+  when: mode == "master"
+  tags: mysql

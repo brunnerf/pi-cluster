@@ -1,0 +1,3 @@
+- name: mysql | delete mysql deployment
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/mysql/mysql.yml

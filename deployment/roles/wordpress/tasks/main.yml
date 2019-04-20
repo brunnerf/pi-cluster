@@ -1,5 +1,15 @@
 ---
 - name: sqlsecrets
-  import_tasks: sqlsecrets.yml
+  import_tasks: mysql.yml
   when: mode == "master"
   tags: sqlsecrets
+
+- name: mysql
+  import_tasks: mysql.yml
+  when: mode == "master"
+  tags: mysql
+
+- name: wordpress
+  import_tasks: wordpress.yml
+  when: mode == "master"
+  tags: wordpress
