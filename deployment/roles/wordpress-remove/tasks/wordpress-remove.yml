@@ -1,0 +1,7 @@
+- name: wordpress | load wordpress ingress
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/wordpress/wordpress-ingress.yml
+
+- name: wordpress | load wordpress
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/wordpress/wordpress.yml

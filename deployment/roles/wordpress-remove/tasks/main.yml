@@ -1,5 +1,10 @@
 ---
 - name: remove mysql
+  import_tasks: wordpress-remove.yml
+  when: mode == "master"
+  tags: wordpress
+
+- name: remove mysql
   import_tasks: mysql-remove.yml
   when: mode == "master"
   tags: mysql

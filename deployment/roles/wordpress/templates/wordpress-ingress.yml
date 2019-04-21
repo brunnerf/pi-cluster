@@ -2,24 +2,6 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: wordpress-internal
-  annotations:
-    traefik.frontend.rule.type: PathPrefix
-  labels:
-    traffic-type: internal
-spec:
-  rules:
-  - host: wordpress.cube.kreis3.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: wordpress
-          servicePort: 80
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
   name: wordpress-exernal
   annotations:
     traefik.frontend.rule.type: PathPrefix
