@@ -1,0 +1,9 @@
+---
+- name: Hello
+  hosts: master
+  remote_user: pi
+  become: true
+
+  roles:
+  - role: hello-remove
+    mode: master

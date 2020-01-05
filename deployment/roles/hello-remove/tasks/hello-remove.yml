@@ -1,0 +1,7 @@
+- name: hello | delete hello ingress
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/hello/hello-ingress.yml
+
+- name: hello | delete hello
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/hello/hello.yml

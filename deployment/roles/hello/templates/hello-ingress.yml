@@ -1,0 +1,18 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello-exernal
+  annotations:
+    traefik.frontend.rule.type: PathPrefix
+  labels:
+    traffic-type: external
+spec:
+  rules:
+  - host: hello.kube.kreis3.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hello
+          servicePort: 80

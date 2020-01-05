@@ -1,0 +1,16 @@
+- name: hello | Create dir /etc/kubernetes/apps/hello
+  file: path=/etc/kubernetes/apps/hello state=directory mode=0775
+
+- name: hello | copy hello definition
+  template: src=hello.yml dest=/etc/kubernetes/apps/hello
+
+- name: hello | copy hello ingress
+  template: src=hello-ingress.yml dest=/etc/kubernetes/apps/hello
+
+- name: hello | load hello
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/hello/hello.yml
+
+- name: hello | load hello ingress
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/hello/hello-ingress.yml

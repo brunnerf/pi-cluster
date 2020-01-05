@@ -1,0 +1,5 @@
+---
+- name: remove hello
+  import_tasks: hello-remove.yml
+  when: mode == "master"
+  tags: hello
