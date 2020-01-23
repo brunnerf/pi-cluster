@@ -14,10 +14,10 @@
 #  when: mode == "master"
 #  tags: nfs-test
 
-- name: metrics server
-  import_tasks: metrics-server.yml
-  when: mode == "master"
-  tags: metrics-server
+#- name: metrics server
+#  import_tasks: metrics-server.yml
+#  when: mode == "master"
+#  tags: metrics-server
 
 - name: install secrets
   import_tasks: secrets.yml

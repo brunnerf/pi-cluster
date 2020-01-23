@@ -1,0 +1,6 @@
+---
+- name: update apt packages
+  import_tasks: apt-upgrade.yml
+
+- name: reboot
+  import_tasks: reboot.yml
