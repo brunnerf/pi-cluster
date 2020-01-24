@@ -18,7 +18,7 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
-        image: traefik:v1.7.9
+        image: traefik:v1.7.20
         imagePullPolicy: IfNotPresent
         #args: ["storeconfig", "-c", "/config/traefik.toml", "--consul.endpoint=$(HOST_IP):8500" ]
         args: ["storeconfig", "-c", "/config/traefik.toml", "--consul.endpoint=kreis3-consul-server:8500" ]
