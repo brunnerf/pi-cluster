@@ -51,7 +51,7 @@ spec:
             name: kreis3-consul-server-config
       containers:
         - name: consul
-          image: "consul:1.4.2"
+          image: "consul:1.6.2"
           env:
             - name: POD_IP
               valueFrom:
