@@ -8,7 +8,7 @@ items:
       labels:
         name: weave-net
       namespace: kube-system
-  - apiVersion: rbac.authorization.k8s.io/v1beta1
+  - apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
       name: weave-net
@@ -48,7 +48,7 @@ items:
         verbs:
         - patch
         - update
-  - apiVersion: rbac.authorization.k8s.io/v1beta1
+  - apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
       name: weave-net
@@ -62,7 +62,7 @@ items:
       - kind: ServiceAccount
         name: weave-net
         namespace: kube-system
-  - apiVersion: rbac.authorization.k8s.io/v1beta1
+  - apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
       name: weave-net
@@ -85,7 +85,7 @@ items:
           - configmaps
         verbs:
           - create
-  - apiVersion: rbac.authorization.k8s.io/v1beta1
+  - apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
       name: weave-net
@@ -100,7 +100,7 @@ items:
       - kind: ServiceAccount
         name: weave-net
         namespace: kube-system
-  - apiVersion: extensions/v1beta1
+  - apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: weave-net
@@ -108,7 +108,10 @@ items:
         name: weave-net
       namespace: kube-system
     spec:
-      # Wait 5 seconds to let pod connect before rolling next pod
+      selector:
+        matchLabels:
+          name: weave-net
+     # Wait 5 seconds to let pod connect before rolling next pod
       minReadySeconds: 5
       template:
         metadata:
@@ -125,7 +128,7 @@ items:
                     fieldRef:
                       apiVersion: v1
                       fieldPath: spec.nodeName
-              image: 'weaveworks/weave-kube:2.5.1'
+              image: 'weaveworks/weave-kube:2.6.0'
               readinessProbe:
                 httpGet:
                   host: 127.0.0.1
@@ -163,7 +166,7 @@ items:
                     fieldRef:
                       apiVersion: v1
                       fieldPath: spec.nodeName
-              image: 'weaveworks/weave-npc:2.5.1'
+              image: 'weaveworks/weave-npc:2.6.0'
 #npc-args
               resources:
                 requests:
