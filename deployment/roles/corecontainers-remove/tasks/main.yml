@@ -29,10 +29,10 @@
   when: mode == "master"
   tags: secrets
 
-- name: remove metrics server
-  import_tasks: metrics-server-remove.yml
-  when: mode == "master"
-  tags: metrics-server
+#- name: remove metrics server
+#  import_tasks: metrics-server-remove.yml
+#  when: mode == "master"
+#  tags: metrics-server
 
 - name: remove nfs
   import_tasks: nfs-remove.yml
