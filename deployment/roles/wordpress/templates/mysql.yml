@@ -28,13 +28,17 @@ spec:
     tier: mysql
   clusterIP: None
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress-mysql
   labels:
     app: wordpress
 spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: mysql
   strategy:
     type: Recreate
   template:

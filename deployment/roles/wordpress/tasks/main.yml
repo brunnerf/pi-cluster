@@ -1,6 +1,6 @@
 ---
 - name: sqlsecrets
-  import_tasks: mysql.yml
+  import_tasks: sqlsecrets.yml
   when: mode == "master"
   tags: sqlsecrets
 

@@ -28,13 +28,17 @@ spec:
     tier: frontend
   clusterIP: None
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress
   labels:
     app: wordpress
 spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: frontend   
   strategy:
     type: Recreate
   template:
@@ -44,7 +48,7 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: wordpress:5.1.1-apache
+      - image: wordpress:5.3.2-apache
         name: wordpress
         env:
         - name: WORDPRESS_DB_HOST
