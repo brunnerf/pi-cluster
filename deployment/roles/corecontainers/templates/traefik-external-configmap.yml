@@ -47,8 +47,11 @@ data:
       [acme.dnsChallenge]
         provider = "cloudflare" # DNS Provider name (cloudflare, OVH, gandi...)
         delayBeforeCheck = 0
+    #[[acme.domains]]
+    #  main = "*.kube.kreis3.com"
+    #  sans = ["kube.kreis3.com"]
     [[acme.domains]]
-      main = "*.kube.kreis3.com"
-      sans = ["kube.kreis3.com"]
-    [[acme.domains]]
-      main = "kreis3.com"
+      main = "*.kreis3.com"
+      sans = ["kreis3.com"]
+    #[[acme.domains]]
+    #  main = "kreis3.com"
