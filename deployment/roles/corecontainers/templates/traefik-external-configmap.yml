@@ -52,6 +52,5 @@ data:
     #  sans = ["kube.kreis3.com"]
     [[acme.domains]]
       main = "*.kreis3.com"
-      sans = ["kreis3.com"]
     #[[acme.domains]]
     #  main = "kreis3.com"
