@@ -4,7 +4,7 @@ network:
   service_subnet: 192.168.2.0/24
   pod_subnet: 10.244.0.0/16
 k8s:
-  version: 1.17.0*
+  version: 1.17.3*
   # Timing is good for demos. Defaults are 5min eviction and 40s node grace period
   # TODO: Not yet put into the k8s configuration
   pod_eviction_timeout: 120s
