@@ -128,7 +128,7 @@ items:
                     fieldRef:
                       apiVersion: v1
                       fieldPath: spec.nodeName
-              image: 'weaveworks/weave-kube:2.6.0'
+              image: 'weaveworks/weave-kube:2.6.1'
               readinessProbe:
                 httpGet:
                   host: 127.0.0.1
@@ -166,7 +166,7 @@ items:
                     fieldRef:
                       apiVersion: v1
                       fieldPath: spec.nodeName
-              image: 'weaveworks/weave-npc:2.6.0'
+              image: 'weaveworks/weave-npc:2.6.1'
 #npc-args
               resources:
                 requests:
