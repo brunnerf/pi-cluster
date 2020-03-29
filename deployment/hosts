@@ -8,6 +8,6 @@ piworker3 ansible_host=192.168.2.13
 pimaster  ansible_host=192.168.2.10
 
 [slaves]
-#piworker1 ansible_host=192.168.2.11
-#piworker2 ansible_host=192.168.2.12
+piworker1 ansible_host=192.168.2.11
+piworker2 ansible_host=192.168.2.12
 piworker3 ansible_host=192.168.2.13
