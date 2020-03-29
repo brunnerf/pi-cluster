@@ -1,0 +1,9 @@
+---
+- name: Kubernetes Upgrade
+  hosts: master
+  remote_user: pi
+  become: true
+
+  roles:
+  - role: kubernetes-upgrade
+    mode: master

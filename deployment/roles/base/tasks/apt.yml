@@ -26,6 +26,6 @@
 
 - name: Install Packages
   apt:
-    name: ['iperf', 'mtr-tiny', 'bridge-utils', 'socat', 'jq', 'vim', 'htop']
+    name: ['iperf', 'mtr-tiny', 'bridge-utils', 'socat', 'jq', 'vim', 'htop', 'python-pexpect']
     force: yes
     state: present

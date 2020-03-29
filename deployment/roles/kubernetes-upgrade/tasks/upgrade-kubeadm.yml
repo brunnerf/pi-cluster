@@ -1,0 +1,9 @@
+# Node
+- name: apt | upgrade kubeadm
+  apt:
+    name: ['kubeadm={{ kubernetes_version }}-00']
+    only_upgrade: yes
+    force: yes
+    state: present
+    update_cache: yes
+    autoremove: yes

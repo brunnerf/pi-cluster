@@ -1,0 +1,6 @@
+---
+#kubectl drain <cp-node-name> --ignore-daemonsets
+- name: kubectl | uncordon node
+  become_user: pi
+  command: kubectl uncordon {{ inventory_hostname | lower}}
+  delegate_to: "{{ groups['master'][0]}}"

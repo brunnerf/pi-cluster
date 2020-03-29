@@ -1,0 +1,16 @@
+- name: kubadm| upgrade plan
+  command: kubeadm upgrade plan
+  register: upgrade_plan
+
+- debug: var=upgrade_plan.stdout_lines
+
+- name: Run kubeadm upgrade
+  expect:
+    command: kubeadm upgrade apply {{kubernetes_version}}
+    echo: yes
+    timeout: "{{upgrade_timeout}}"
+    responses:
+      upgrade?: "y"
+  register: upgrade
+
+- debug: var=upgrade.stdout_lines
