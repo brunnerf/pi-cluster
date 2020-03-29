@@ -31,8 +31,8 @@
 - name: Delete /opt/cni/bin/weave-net
   file: path=/opt/cni/bin/weave-net state=absent
 
-- name: Delete /opt/cni/bin/weave-plugin-2.5.0
-  file: path=/opt/cni/bin/weave-plugin-2.5.0 state=absent
+- name: Delete /opt/cni/bin/weave-plugin-2.6.1
+  file: path=/opt/cni/bin/weave-plugin-2.6.1 state=absent
 
 - name: Reboot
   shell: sleep 2 && reboot
