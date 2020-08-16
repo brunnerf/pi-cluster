@@ -1,0 +1,10 @@
+---
+- name: zookeeper
+  import_tasks: zookeeper.yml
+  when: mode == "master"
+  tags: zookeeper
+
+- name: kafka
+  import_tasks: kafka.yml
+  when: mode == "master"
+  tags: kafka

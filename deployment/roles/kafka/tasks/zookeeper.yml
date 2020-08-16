@@ -1,0 +1,9 @@
+- name: Create dir /etc/kubernetes/apps/zookeeper
+  file: path=/etc/kubernetes/apps/zookeeper state=directory mode=0775
+
+- name: kafka | copy zookeeper yml
+  template: src=zookeeper.yml dest=/etc/kubernetes/apps/zookeeper
+
+- name: kafka | deploy zookeeper
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/zookeeper/zookeeper.yml

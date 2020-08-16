@@ -1,0 +1,3 @@
+- name: kafka| remove kafka
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/kafka/kafka.yml

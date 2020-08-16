@@ -1,0 +1,3 @@
+- name: kafka| remove zookeeper
+  become_user: pi
+  command: kubectl delete -f /etc/kubernetes/apps/zookeeper/zookeeper.yml

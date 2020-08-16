@@ -1,0 +1,9 @@
+- name: Create dir /etc/kubernetes/apps/kafka
+  file: path=/etc/kubernetes/apps/kafka state=directory mode=0775
+
+- name: kafka | copy kafka yml
+  template: src=kafka.yml dest=/etc/kubernetes/apps/kafka
+
+- name: kafka | deploy kafka
+  become_user: pi
+  command: kubectl apply -f /etc/kubernetes/apps/kafka/kafka.yml

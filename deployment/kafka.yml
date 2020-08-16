@@ -1,0 +1,9 @@
+---
+- name: Kafka
+  hosts: master
+  remote_user: pi
+  become: true
+
+  roles:
+  - role: kafka
+    mode: master

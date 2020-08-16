@@ -1,0 +1,9 @@
+---
+- name: Kafka-Remove
+  hosts: master
+  remote_user: pi
+  become: true
+
+  roles:
+  - role: kafka-remove
+    mode: master

@@ -1,0 +1,9 @@
+---
+- name: remove kafka
+  import_tasks: kafka-remove.yml
+  when: mode == "master"
+  tags: kafka
+- name: remove zookeeper
+  import_tasks: zookeeper-remove.yml
+  when: mode == "master"
+  tags: zookeeper
