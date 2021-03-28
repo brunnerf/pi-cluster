@@ -9,47 +9,57 @@
   when: mode == "master"
   tags: nfs
 
-#- name: test nfs support
-#  import_tasks: nfs-test.yml
-#  when: mode == "master"
-#  tags: nfs-test
-
-#- name: metrics server
-#  import_tasks: metrics-server.yml
-#  when: mode == "master"
-#  tags: metrics-server
-
-- name: install secrets
-  import_tasks: secrets.yml
+- name: test nfs support
+  import_tasks: nfs-test.yml
   when: mode == "master"
-  tags: secrets
+  tags: nfs-test
 
-- name: traefik internal
-  import_tasks: traefik-internal.yml
+- name: install nginx
+  import_tasks: nginx.yml
   when: mode == "master"
-  tags: traefik-internal
+  tags: nginx
+
+- name: install cert-manager
+  import_tasks: cert-manager.yml
+  when: mode == "master"
+  tags: cert-manager
+
+#- name: install secrets
+#  import_tasks: secrets.yml
+#  when: mode == "master"
+#  tags: secrets
+
+#- name: traefik internal
+#  import_tasks: traefik-internal.yml
+#  when: mode == "master"
+#  tags: traefik-internal
 
 #- name:  consul test
 #  import_tasks: consul-test.yml
 #  when: mode == "master"
 #  tags: consul-test
 
-- name:  consul
-  import_tasks: consul.yml
-  when: mode == "master"
-  tags: consul
+#- name:  consul
+#  import_tasks: consul.yml
+#  when: mode == "master"
+#  tags: consul
 
-- name: traefik external store-kv
-  import_tasks: traefik-external-storekv.yml
-  when: mode == "master"
-  tags: traefik-external-kv
+#- name: traefik external store-kv
+#  import_tasks: traefik-external-storekv.yml
+#  when: mode == "master"
+#  tags: traefik-external-kv
 
-- name: traefik external
-  import_tasks: traefik-external.yml
-  when: mode == "master"
-  tags: traefik-external
+#- name: traefik external
+#  import_tasks: traefik-external.yml
+#  when: mode == "master"
+#  tags: traefik-external
 
 - name: dashboard
   import_tasks: dashboard.yml
   when: mode == "master"
   tags: dashboard
+
+- name: dashboard-external
+  import_tasks: dashboard-external.yml
+  when: mode == "master"
+  tags: dashboard-external

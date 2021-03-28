@@ -1,44 +1,25 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kubernetes-dashboard
   namespace: kube-system
   annotations:
-    traefik.frontend.rule.type: PathPrefix
-  labels:
-    traffic-type: internal
+    cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
+  ingressClassName: nginx-internal
+  tls:
+  - hosts:
+    - cube.kreis3.com
+    secretName: cube-kreis3-tls
   rules:
   - host: cube.kreis3.com
     http:
       paths:
-      - path: /
-        backend:
-          serviceName: kubernetes-dashboard
-          servicePort: 80
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: kubernetes-dashboard-exernal
-  namespace: kube-system
-  annotations:
-  annotations:
-    ingress.kubernetes.io/auth-type: basic
-    # name of the secret that contains the user/password definitions
-    ingress.kubernetes.io/auth-secret: kube-user
-    # remove authorization header. otherwise dashboard will reject requests
-    ingress.kubernetes.io/auth-remove-header: "true"
-    traefik.frontend.rule.type: PathPrefix
-  labels:
-    traffic-type: external
-spec:
-  rules:
-  - host: kube.kreis3.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: kubernetes-dashboard
-          servicePort: 80
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: kubernetes-dashboard
+              port:
+                number: 80

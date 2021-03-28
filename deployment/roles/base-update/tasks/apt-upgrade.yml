@@ -2,4 +2,4 @@
   apt:
     update_cache: yes
     autoremove: yes
-    upgrade: yes
+    upgrade: 'yes'

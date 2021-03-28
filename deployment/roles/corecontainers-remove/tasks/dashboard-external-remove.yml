@@ -1,0 +1,12 @@
+
+- name: external-ingress | remove dashboard external ingress
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl delete -f /etc/kubernetes/apps/dashboard-external/dashboard-ingress-external.yml
+
+- name: secrets | load secrets
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl delete -f /etc/kubernetes/apps/dashboard-external/secrets.yml

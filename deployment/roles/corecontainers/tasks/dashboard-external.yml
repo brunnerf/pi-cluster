@@ -1,0 +1,20 @@
+- name: Create dir /etc/kubernetes/apps/dashboard-external
+  file: path=/etc/kubernetes/apps/dashboard-external state=directory mode=0775
+
+- name: secrets | copy secrets file
+  template: src=secrets.yml dest=/etc/kubernetes/apps/dashboard-external
+
+- name: secrets | load secrets
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl apply -f /etc/kubernetes/apps/dashboard-external/secrets.yml
+
+- name: external ingress | copy ingress file
+  template: src=dashboard-ingress-external.yml dest=/etc/kubernetes/apps/dashboard-external
+
+- name: external-ingress | load dashboard ingress
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl create -f /etc/kubernetes/apps/dashboard-external/dashboard-ingress-external.yml

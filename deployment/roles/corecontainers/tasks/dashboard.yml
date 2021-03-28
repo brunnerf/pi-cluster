@@ -9,8 +9,12 @@
 
 - name: kubectl | load dashboard
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl create -f /etc/kubernetes/apps/dashboard/dashboard-deployment.yml
 
-- name: kubectl | load dashboard internal ingress
+- name: kubectl | load dashboard ingress
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl create -f /etc/kubernetes/apps/dashboard/dashboard-ingress.yml

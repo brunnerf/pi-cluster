@@ -1,0 +1,24 @@
+---
+
+- name: Remove helm
+  hosts: master
+  gather_facts: yes
+  remote_user: pi
+  become: true
+  become_method: sudo
+  vars_files:
+    - config.yml
+  roles:
+    - role: k3s-remove/master
+
+
+- name: Remove k3s
+  hosts: raspberries
+  gather_facts: yes
+  remote_user: pi
+  become: true
+  become_method: sudo
+  vars_files:
+    - config.yml
+  roles:
+    - role: k3s-remove

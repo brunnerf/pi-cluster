@@ -1,6 +1,0 @@
----
-#kubectl drain <cp-node-name> --ignore-daemonsets
-- name: kubectl | drain node
-  become_user: pi
-  command: kubectl drain --ignore-daemonsets --delete-local-data {{ inventory_hostname | lower}} 
-  delegate_to: "{{ groups['master'][0]}}"

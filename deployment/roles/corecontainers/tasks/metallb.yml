@@ -9,8 +9,12 @@
 
 - name: kubectl | apply metallb
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/metallb/metallb.yml
 
 - name: kubectl | apply layer2 metallb
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/metallb/metallb-conf.yml

@@ -1,2 +1,0 @@
-- name: Run kubeadm upgrade node
-  command: kubeadm upgrade node

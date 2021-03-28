@@ -1,4 +1,0 @@
-- name: reload service kubelet, in all cases
-  service:
-    name: kubelet
-    state: restarted

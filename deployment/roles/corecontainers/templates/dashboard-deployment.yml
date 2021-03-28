@@ -172,7 +172,7 @@ metadata:
   name: kubernetes-dashboard
   namespace: kube-system
 spec:
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -184,7 +184,7 @@ spec:
     spec:
       containers:
         - name: kubernetes-dashboard
-          image: kubernetesui/dashboard:v2.0.0-rc7
+          image: kubernetesui/dashboard:v2.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9090
@@ -220,67 +220,70 @@ spec:
           emptyDir: {}
       serviceAccountName: kubernetes-dashboard
       # Comment the following tolerations if Dashboard must not be deployed on master
-      #tolerations:
-      #  - key: node-role.kubernetes.io/master
-      #    effect: NoSchedule
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
 
 ---
 
-# kind: Service
-# apiVersion: v1
-# metadata:
-#   labels:
-#     k8s-app: dashboard-metrics-scraper
-#   name: dashboard-metrics-scraper
-#   namespace: kube-system
-# spec:
-#   ports:
-#     - port: 8000
-#       targetPort: 8000
-#   selector:
-#     k8s-app: dashboard-metrics-scraper
-#
-# ---
-#
-# kind: Deployment
-# apiVersion: apps/v1
-# metadata:
-#   labels:
-#     k8s-app: dashboard-metrics-scraper
-#   name: dashboard-metrics-scraper
-#   namespace: kube-system
-# spec:
-#   replicas: 1
-#   revisionHistoryLimit: 10
-#   selector:
-#     matchLabels:
-#       k8s-app: dashboard-metrics-scraper
-#   template:
-#     metadata:
-#       labels:
-#         k8s-app: dashboard-metrics-scraper
-#     spec:
-#       containers:
-#         - name: dashboard-metrics-scraper
-#           image: kubernetesui/metrics-scraper:v1.0.1
-#           ports:
-#             - containerPort: 8000
-#               protocol: TCP
-#           livenessProbe:
-#             httpGet:
-#               scheme: HTTP
-#               path: /
-#               port: 8000
-#             initialDelaySeconds: 30
-#             timeoutSeconds: 30
-#           volumeMounts:
-#           - mountPath: /tmp
-#             name: tmp-volume
-#       serviceAccountName: kubernetes-dashboard
-#       # Comment the following tolerations if Dashboard must not be deployed on master
-#       #tolerations:
-#       #  - key: node-role.kubernetes.io/master
-#       #    effect: NoSchedule
-#       volumes:
-#         - name: tmp-volume
-#           emptyDir: {}
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: dashboard-metrics-scraper
+  name: dashboard-metrics-scraper
+  namespace: kube-system
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    k8s-app: dashboard-metrics-scraper
+
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    k8s-app: dashboard-metrics-scraper
+  name: dashboard-metrics-scraper
+  namespace: kube-system
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: dashboard-metrics-scraper
+  template:
+    metadata:
+      labels:
+        k8s-app: dashboard-metrics-scraper
+    spec:
+      containers:
+        - name: dashboard-metrics-scraper
+          image: kubernetesui/metrics-scraper:v1.0.4
+          # reduce load of scraping
+          args:
+            - --metric-resolution=3m0s
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /
+              port: 8000
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp-volume
+      serviceAccountName: kubernetes-dashboard
+      # Comment the following tolerations if Dashboard must not be deployed on master
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+      volumes:
+        - name: tmp-volume
+          emptyDir: {}

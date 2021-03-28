@@ -15,16 +15,24 @@
 
 - name: nfs | define namespace
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/nfs/nfs-namespace.yml
 
 - name: nfs | define role
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/nfs/nfs-role.yml
 
 - name: nfs | define storagelass
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/nfs/nfs-storageclass.yml
 
 - name: nfs | deploy storageclass provider
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/nfs/nfs-deployment.yml

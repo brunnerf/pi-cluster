@@ -6,4 +6,6 @@
 
 - name: myslq | load mysql
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/mysql/mysql.yml

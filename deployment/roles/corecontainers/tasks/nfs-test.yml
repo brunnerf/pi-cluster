@@ -9,8 +9,12 @@
 
 - name: nfs | apply test claim
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/nfs/test/nfs-test-claim.yml
 
 - name: nfs | start test pod
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl create -f /etc/kubernetes/apps/nfs/test/nfs-test-pod.yml

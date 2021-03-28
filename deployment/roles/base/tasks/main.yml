@@ -13,6 +13,13 @@
 
 - name: Add and update packages
   import_tasks: apt.yml
+  tags: apt
+
+- name: Update cgroups
+  import_tasks: cgroup.yml
+
+- name: Set iptables to legacy mode and enable forwarding mode
+  import_tasks: ipsetup.yml
 
 - name: Reboot
   import_tasks: reboot.yml

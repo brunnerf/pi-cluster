@@ -1,5 +1,0 @@
-- name: apt | Install Packages
-  apt:
-    name: ['kubelet={{ k8s.version }}', 'kubeadm={{ k8s.version }}', 'kubectl={{ k8s.version }}', 'kubernetes-cni']
-    force: yes
-    state: present

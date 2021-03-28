@@ -1,9 +1,10 @@
 ---
-- name: Kubernetes Core Containers
+- name: K3s Core Containers
   hosts: master
   remote_user: pi
   become: true
-
+  vars_files:
+    - config.yml
   roles:
   - role: corecontainers
     mode: master

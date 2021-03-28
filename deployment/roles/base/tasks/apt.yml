@@ -5,18 +5,18 @@
     state: present
     force: yes
 
-- name: Add Kubernetes Repo Key
-  apt_key: url=https://packages.cloud.google.com/apt/doc/apt-key.gpg
+#- name: Add Kubernetes Repo Key
+#  apt_key: url=https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
-- name: Add Kubernetes Repo
+#- name: Add Kubernetes Repo
   # Try to pick up latest stable builds. Switch over to '-unstable' if targeting latest releases
-  apt_repository: repo='deb http://apt.kubernetes.io/ kubernetes-xenial main' state=present
+#  apt_repository: repo='deb http://apt.kubernetes.io/ kubernetes-xenial main' state=present
 
-- name: Add Docker Repo Key
-  apt_key: url=https://download.docker.com/linux/raspbian/gpg
+#- name: Add Docker Repo Key
+#  apt_key: url=https://download.docker.com/linux/raspbian/gpg
 
-- name: Add Docker Repo
-  apt_repository: repo='deb [arch=armhf] https://download.docker.com/linux/raspbian stretch stable'
+#- name: Add Docker Repo
+#  apt_repository: repo='deb [arch=armhf] https://download.docker.com/linux/raspbian stretch stable'
 
 - name: Update APT package cache and upgrade
   apt:
@@ -26,6 +26,6 @@
 
 - name: Install Packages
   apt:
-    name: ['iperf', 'mtr-tiny', 'bridge-utils', 'socat', 'jq', 'vim', 'htop', 'python-pexpect', 'haveged']
+    name: ['iperf', 'mtr-tiny', 'bridge-utils', 'socat', 'jq', 'vim', 'htop', 'python-pexpect', 'haveged', 'python3-pip', 'git']
     force: yes
     state: present

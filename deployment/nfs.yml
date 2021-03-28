@@ -3,7 +3,7 @@
   hosts: master
   remote_user: pi
   become: true
-
+  become_method: sudo
   roles:
   - role: nfs
     mode: master

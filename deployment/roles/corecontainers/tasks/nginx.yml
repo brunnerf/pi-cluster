@@ -1,0 +1,42 @@
+# From repository
+- name: Create dir /etc/kubernetes/apps/nginx
+  file: path=/etc/kubernetes/apps/nginx state=directory mode=0775
+
+- name: nginx | copy internal config
+  template: src=nginx-internal-helm.yml dest=/etc/kubernetes/apps/nginx
+
+- name: nginx | copy external config
+  template: src=nginx-external-helm.yml dest=/etc/kubernetes/apps/nginx
+
+- name: Add stable chart repo
+  become_user: pi
+  community.kubernetes.helm_repository:
+    name: nginx
+    repo_url: "https://kubernetes.github.io/ingress-nginx"
+
+
+- name: Add nginx internal
+  become_user: pi
+  community.kubernetes.helm:
+    name: nginx
+    kubeconfig: /home/pi/.kube/config
+    create_namespace: yes
+    release_namespace: kube-system
+    chart_ref: nginx/ingress-nginx
+    update_repo_cache: yes
+    values_files:
+      - "/etc/kubernetes/apps/nginx/nginx-internal-helm.yml"
+
+- pause:
+    seconds: 30
+
+- name: Add nginx external
+  become_user: pi
+  community.kubernetes.helm:
+    name: nginx-external
+    kubeconfig: /home/pi/.kube/config
+    create_namespace: yes
+    release_namespace: nginx-external
+    chart_ref: nginx/ingress-nginx
+    values_files:
+      - "/etc/kubernetes/apps/nginx/nginx-external-helm.yml"

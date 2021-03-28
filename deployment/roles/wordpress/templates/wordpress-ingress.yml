@@ -1,18 +1,24 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: wordpress-exernal
   annotations:
-    traefik.frontend.rule.type: PathPrefix
-  labels:
-    traffic-type: external
+    cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
+  ingressClassName: nginx-external
+  tls:
+  - hosts:
+    - kreis3.com
+    secretName: kreis3-tls
   rules:
   - host: kreis3.com
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: wordpress
-          servicePort: 80
+          service:
+            name: wordpress
+            port:
+              number: 80

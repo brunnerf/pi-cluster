@@ -1,0 +1,33 @@
+- name: Remove issuer
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl delete -f /etc/kubernetes/apps/cert-manager/cert-manager-issuer.yml
+
+
+- name: Remove cert-manager release and waiting suppression ending
+  become_user: pi
+  community.kubernetes.helm:
+    name: cert-manager
+    kubeconfig: /home/pi/.kube/config
+    release_namespace: cert-manager
+    state: absent
+    wait: true
+
+- name: Remove cloudflare secret
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl delete -f /etc/kubernetes/apps/cert-manager/cert-manager-secret.yml
+
+- name: Remove CRD resources
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml
+
+- name: Remove namespace
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl delete -f /etc/kubernetes/apps/cert-manager/cert-manager-namespace.yml

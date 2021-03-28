@@ -1,0 +1,65 @@
+# From repository
+- name: Create dir /etc/kubernetes/apps/cert-manager
+  file: path=/etc/kubernetes/apps/cert-manager state=directory mode=0775
+
+- name: cert-manager | copy helm config
+  template: src=cert-manager-helm.yml dest=/etc/kubernetes/apps/cert-manager
+
+- name: cert-manager | copy namespace file
+  template: src=cert-manager-namespace.yml dest=/etc/kubernetes/apps/cert-manager
+
+- name: Add stable chart repo
+  become_user: pi
+  community.kubernetes.helm_repository:
+    name: cert-manager
+    repo_url: "https://charts.jetstack.io"
+
+- name: Create namespace
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl apply -f /etc/kubernetes/apps/cert-manager/cert-manager-namespace.yml
+
+- name: Load CRD resources
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml
+
+- pause:
+    seconds: 30
+
+- name: Add cert-manager
+  become_user: pi
+  community.kubernetes.helm:
+    name: cert-manager
+    kubeconfig: /home/pi/.kube/config
+    release_namespace: cert-manager
+    chart_ref: jetstack/cert-manager
+    chart_version: 1.2.0
+    values_files:
+      - "/etc/kubernetes/apps/cert-manager/cert-manager-helm.yml"
+
+- name: cert-manager | copy cloudflare secret
+  template: src=cert-manager-secret.yml dest=/etc/kubernetes/apps/cert-manager
+
+- name: Load cloudflare secret
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl apply -f /etc/kubernetes/apps/cert-manager/cert-manager-secret.yml
+
+- pause:
+    seconds: 30
+
+- name: cert-manager | copy issuer
+  template: src=cert-manager-issuer.yml dest=/etc/kubernetes/apps/cert-manager
+
+- name: Load issuer
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl apply -f /etc/kubernetes/apps/cert-manager/cert-manager-issuer.yml
+
+- name: cert-manager | copy test-certificate
+  template: src=cert-manager-test-certificate.yml dest=/etc/kubernetes/apps/cert-manager

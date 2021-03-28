@@ -9,8 +9,12 @@
 
 - name: wordpress | load wordpress
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/wordpress/wordpress.yml
 
 - name: wordpress | load wordpress ingress
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/wordpress/wordpress-ingress.yml

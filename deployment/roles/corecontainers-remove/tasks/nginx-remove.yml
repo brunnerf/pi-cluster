@@ -1,0 +1,17 @@
+#- name: Remove test release and waiting suppression ending
+#  become_user: pi
+#  community.kubernetes.helm:
+#    name: nginx-external
+#    kubeconfig: /home/pi/.kube/config
+#    release_namespace: kube-system
+#    state: absent
+#    wait: true
+
+- name: Remove nginx-internal
+  become_user: pi
+  community.kubernetes.helm:
+    name: nginx-internal
+    kubeconfig: /home/pi/.kube/config
+    release_namespace: nginx-internal
+    state: absent
+    wait: true

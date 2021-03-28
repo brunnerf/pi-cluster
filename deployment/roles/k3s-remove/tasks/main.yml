@@ -1,0 +1,3 @@
+- name: k3s-remove
+  import_tasks: k3s-uninstall.yml
+  tags: k3s

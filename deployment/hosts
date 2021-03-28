@@ -1,13 +1,13 @@
 [raspberries]
-pimaster  ansible_host=192.168.2.10
-piworker1 ansible_host=192.168.2.11
-piworker2 ansible_host=192.168.2.12
-piworker3 ansible_host=192.168.2.13
+pimaster  ansible_host=192.168.2.10 ansible_python_interpreter=/usr/bin/python3
+piworker1 ansible_host=192.168.2.11 ansible_python_interpreter=/usr/bin/python3
+piworker2 ansible_host=192.168.2.12 ansible_python_interpreter=/usr/bin/python3
+piworker3 ansible_host=192.168.2.13 ansible_python_interpreter=/usr/bin/python3
 
 [master]
-pimaster  ansible_host=192.168.2.10
+pimaster  ansible_host=192.168.2.10 ansible_python_interpreter=/usr/bin/python3
 
 [slaves]
-piworker1 ansible_host=192.168.2.11
-piworker2 ansible_host=192.168.2.12
-piworker3 ansible_host=192.168.2.13
+piworker1 ansible_host=192.168.2.11 ansible_python_interpreter=/usr/bin/python3
+piworker2 ansible_host=192.168.2.12 ansible_python_interpreter=/usr/bin/python3
+piworker3 ansible_host=192.168.2.13 ansible_python_interpreter=/usr/bin/python3

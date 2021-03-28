@@ -1,0 +1,7 @@
+- name: master
+  import_tasks: master.yml
+  tags: master
+
+- name: helm
+  import_tasks: helm.yml
+  tags: helm

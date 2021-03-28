@@ -1,0 +1,4 @@
+- name: Clean artifact path
+  file:
+    state: absent
+    path: /usr/local/bin/helm

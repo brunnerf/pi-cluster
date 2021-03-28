@@ -1,8 +1,11 @@
-- name: kubectl | remove dashboard
+- name: kubectl | remove dashboard ingress
   become_user: pi
-  command: kubectl delete -f /etc/kubernetes/apps/dashboard/dashboard-deployment.yml
-
-
-- name: kubectl | remove dashboard
-  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl delete -f /etc/kubernetes/apps/dashboard/dashboard-ingress.yml
+
+- name: kubectl | remove dashboard
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl delete -f /etc/kubernetes/apps/dashboard/dashboard-deployment.yml

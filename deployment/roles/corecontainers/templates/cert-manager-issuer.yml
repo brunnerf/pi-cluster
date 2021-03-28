@@ -1,0 +1,41 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    email: {{cf_api_email}}
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    - dns01:
+        cloudflare:
+          email: {{cf_api_email}}
+          apiKeySecretRef:
+            name: cloudflare-api-key-secret
+            key: api-key
+      selector:
+        dnsZones:
+        - 'kreis3.com'
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    email: {{cf_api_email}}
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    solvers:
+    - dns01:
+        cloudflare:
+          email: {{cf_api_email}}
+          apiKeySecretRef:
+            name: cloudflare-api-key-secret
+            key: api-key
+      selector:
+        dnsZones:
+        - 'kreis3.com'

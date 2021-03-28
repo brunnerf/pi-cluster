@@ -1,15 +1,23 @@
 - name: nfs | delete storageclass provider
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl delete -f /etc/kubernetes/apps/nfs/nfs-deployment.yml
 
 - name: nfs | delete storage class
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl delete -f /etc/kubernetes/apps/nfs/nfs-storageclass.yml
 
 - name: nfs | delete role
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl delete -f /etc/kubernetes/apps/nfs/nfs-role.yml
 
 - name: nfs | delete namespace
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl delete -f /etc/kubernetes/apps/nfs/nfs-namespace.yml

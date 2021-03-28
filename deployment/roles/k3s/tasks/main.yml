@@ -1,0 +1,4 @@
+---
+- name: K3s Prerequisites
+  import_tasks: prerequisites.yml
+  tags: prerequisites

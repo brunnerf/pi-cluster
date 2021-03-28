@@ -1,38 +1,48 @@
 ---
 - name: remove dashboard
+  import_tasks: dashboard-external-remove.yml
+  when: mode == "master"
+  tags: dashboard-external
+
+- name: remove dashboard
   import_tasks: dashboard-remove.yml
   when: mode == "master"
   tags: dashboard
 
-- name: remove traefik external
-  import_tasks: traefik-external-remove.yml
-  when: mode == "master"
-  tags: traefik-external
+#- name: remove traefik external
+#  import_tasks: traefik-external-remove.yml
+#  when: mode == "master"
+#  tags: traefik-external
 
-- name:  remove consul
-  import_tasks: consul-remove.yml
-  when: mode == "master"
-  tags: consul
+#- name:  remove consul
+#  import_tasks: consul-remove.yml
+#  when: mode == "master"
+#  tags: consul
 
 #- name:  remove consul test
 #  import_tasks: consul-test-remove.yml
 #  when: mode == "master"
 #  tags: consul-test
 
-- name: remove traefik internal
-  import_tasks: traefik-internal-remove.yml
-  when: mode == "master"
-  tags: traefik-internal
-
-- name: remove secrets
-  import_tasks: secrets-remove.yml
-  when: mode == "master"
-  tags: secrets
-
-#- name: remove metrics server
-#  import_tasks: metrics-server-remove.yml
+#- name: remove traefik internal
+#  import_tasks: traefik-internal-remove.yml
 #  when: mode == "master"
-#  tags: metrics-server
+#  tags: traefik-internal
+
+#- name: remove secrets
+#  import_tasks: secrets-remove.yml
+#  when: mode == "master"
+#  tags: secrets
+
+- name: remove nginx
+  import_tasks: nginx-remove.yml
+  when: mode == "master"
+  tags: nginx
+
+- name: remove cert-manager
+  import_tasks: cert-manager-remove.yml
+  when: mode == "master"
+  tags: cert-manager
 
 - name: remove nfs
   import_tasks: nfs-remove.yml

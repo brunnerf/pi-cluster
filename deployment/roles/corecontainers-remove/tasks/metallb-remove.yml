@@ -1,7 +1,11 @@
 - name: kubectl | remove metalb config
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl delete -f /etc/kubernetes/apps/metallb/metallb-conf.yml
 
 - name: kubectl | remove metalb
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl delete -f /etc/kubernetes/apps/metallb/metallb.yml

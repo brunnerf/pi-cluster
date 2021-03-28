@@ -8,13 +8,20 @@
   template: src=hosts dest=/etc/hosts
 
 - name: Set hostname
-  hostname: name="{{ name }}"
+  ansible.builtin.hostname:
+    name: "{{inventory_hostname}}"
+#    hostname: name="{{ name }}"
+
+- name: Ensure US locale exists
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
 
 - name: Add useDns=no to /etc/ssh/sshd_config
   lineinfile: dest=/etc/ssh/sshd_config state=present line="UseDNS no" insertafter="EOF"
 
 - name: Reload hostname
-  shell: "hostnamectl set-hostname {{ name }}"
+  shell: "hostnamectl set-hostname {{ inventory_hostname }}"
 
 - name: System | Set gpu_mem to 16M
   blockinfile:

@@ -9,8 +9,12 @@
 
 - name: hello | load hello
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/hello/hello.yml
 
 - name: hello | load hello ingress
   become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
   command: kubectl apply -f /etc/kubernetes/apps/hello/hello-ingress.yml

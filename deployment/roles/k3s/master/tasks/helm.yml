@@ -1,0 +1,30 @@
+- name: download helm
+  unarchive:
+    src: "{{ helm_url }}"
+    dest: /tmp
+    copy: no
+
+- name: copy helm binary
+  copy:
+    src: /tmp/linux-arm/helm
+    dest: /usr/local/bin
+    mode: 0755
+    remote_src: yes
+
+- name: Create HELM cache home /home/pi/.cache/helm
+  file: path="/home/{{ansible_user}}/.cache/helm" state=directory mode=0777
+
+- name: Create HELM config home /home/pi/.config/helm
+  file: path="/home/{{ansible_user}}/.config/helm" state=directory mode=0777
+
+- name: Create HELM data home /home/pi/.local/share/helm
+  file: path="/home/{{ansible_user}}/.local/share/helm" state=directory mode=0777
+
+- name: Create HELM plugins home /home/pi/.local/share/helm/plugins
+  file: path="/home/{{ansible_user}}/.local/share/helm/plugins" state=directory mode=0777
+
+- name: Create HELM repository cache home /home/pi/.cache/helm/repository
+  file: path="/home/{{ansible_user}}/.cache/helm/repository" state=directory mode=0777
+
+- name: Install python yaml
+  command: pip3 install pyyaml
