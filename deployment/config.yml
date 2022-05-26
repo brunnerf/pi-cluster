@@ -12,7 +12,7 @@ cloudflare: !vault |
           3163303432663966623461393133313066656431623339366263
 #user:
 #  password: "$1$abc$QP5oAKzOu6KWbcoBQV4KS1"
-k3s_version: v1.20.4+k3s1
+k3s_version: v1.23.6+k3s1
 ansible_user: pi
 systemd_dir: /etc/systemd/system
 master_ip: "{{ hostvars[groups['master'][0]]['ansible_host'] | default(groups['master'][0]) }}"

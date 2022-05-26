@@ -1,15 +1,19 @@
 ---
 - name: Setup ssh access and user
   import_tasks: user.yml
+  tags: user
 
 - name: Power Management
   import_tasks: power_management.yml
+  tags: power
 
 - name: Setup system parameters (boot, hosts, timzone)
   import_tasks: system.yml
+  tags: system
 
 - name: Disable Swap
   import_tasks: disable-swap.yml
+  tags: swap
 
 - name: Add and update packages
   import_tasks: apt.yml
@@ -17,9 +21,12 @@
 
 - name: Update cgroups
   import_tasks: cgroup.yml
+  tags: cgroups
 
 - name: Set iptables to legacy mode and enable forwarding mode
   import_tasks: ipsetup.yml
+  tags: iptables
 
 - name: Reboot
   import_tasks: reboot.yml
+  tags: reboot
