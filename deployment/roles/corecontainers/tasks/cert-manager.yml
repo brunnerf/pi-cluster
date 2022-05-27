@@ -24,7 +24,7 @@
   become_user: pi
   environment:
     KUBECONFIG: /home/pi/.kube/config
-  command: kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml
+  command: kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.crds.yaml
 
 - pause:
     seconds: 30
@@ -35,8 +35,9 @@
     name: cert-manager
     kubeconfig: /home/pi/.kube/config
     release_namespace: cert-manager
-    chart_ref: jetstack/cert-manager
-    chart_version: 1.2.0
+    update_repo_cache: yes
+    chart_ref: cert-manager/cert-manager
+    chart_version: v1.8.0
     values_files:
       - "/etc/kubernetes/apps/cert-manager/cert-manager-helm.yml"
 

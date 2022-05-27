@@ -21,7 +21,7 @@
     name: nginx
     kubeconfig: /home/pi/.kube/config
     create_namespace: yes
-    release_namespace: kube-system
+    release_namespace: nginx-internal
     chart_ref: nginx/ingress-nginx
     update_repo_cache: yes
     values_files:
