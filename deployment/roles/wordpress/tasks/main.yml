@@ -4,10 +4,15 @@
   when: mode == "master"
   tags: sqlsecrets
 
-- name: mysql
-  import_tasks: mysql.yml
+#- name: mysql
+#  import_tasks: mysql.yml
+#  when: mode == "master"
+#  tags: mysql
+
+- name: mariadb
+  import_tasks: mariadb.yml
   when: mode == "master"
-  tags: mysql
+  tags: mariadb
 
 - name: wordpress
   import_tasks: wordpress.yml

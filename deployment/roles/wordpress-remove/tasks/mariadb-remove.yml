@@ -1,0 +1,5 @@
+- name: mysql | delete mariadb deployment
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl delete -f /etc/kubernetes/apps/mariadb/mariadb.yml

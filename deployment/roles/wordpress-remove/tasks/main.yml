@@ -4,7 +4,12 @@
   when: mode == "master"
   tags: wordpress
 
-- name: remove mysql
-  import_tasks: mysql-remove.yml
+#- name: remove mysql
+#  import_tasks: mysql-remove.yml
+#  when: mode == "master"
+#  tags: mysql
+
+- name: remove mariadb
+  import_tasks: mariadb-remove.yml
   when: mode == "master"
-  tags: mysql
+  tags: mariadb

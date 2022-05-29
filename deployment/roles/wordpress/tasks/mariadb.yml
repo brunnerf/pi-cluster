@@ -1,0 +1,11 @@
+- name: mariadb| Create dir /etc/kubernetes/apps/mariadb
+  file: path=/etc/kubernetes/apps/mariadb state=directory mode=0775
+
+- name: mariadb | copy mariadb definition
+  template: src=mariadb.yml dest=/etc/kubernetes/apps/mariadb
+
+- name: mariadb| load mariadb
+  become_user: pi
+  environment:
+    KUBECONFIG: /home/pi/.kube/config
+  command: kubectl apply -f /etc/kubernetes/apps/mariadb/mariadb.yml
