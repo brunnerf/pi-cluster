@@ -3,10 +3,16 @@
   command: dphys-swapfile swapoff
   become: yes
 
-- name: Uninstall swapfile
-  command: dphys-swapfile uninstall
-  become: yes
+- name: Disable dphys-swapfile service
+  systemd:
+    name: dphys-swapfile
+    enabled: no
+    state: stopped
 
-- name: Remove swapfile service
-  command: update-rc.d dphys-swapfile remove
-  become: yes
+#- name: Uninstall swapfile
+# command: dphys-swapfile uninstall
+#  become: yes
+
+#- name: Remove swapfile service
+#  command: update-rc.d dphys-swapfile remove
+#  become: yes
