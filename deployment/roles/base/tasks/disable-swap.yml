@@ -2,12 +2,16 @@
 - name: Disable swapfile
   command: dphys-swapfile swapoff
   become: yes
+  tags:
+    - swap
 
 - name: Disable dphys-swapfile service
   systemd:
     name: dphys-swapfile
     enabled: no
     state: stopped
+  tags:
+    - swap
 
 #- name: Uninstall swapfile
 # command: dphys-swapfile uninstall
