@@ -20,6 +20,8 @@
     - config.yml
   roles:
     - k3s/master
+  tags:
+    -k3s-master
 
 
 - name: Setup Workers
@@ -32,3 +34,5 @@
     - config.yml
   roles:
     - k3s/workers
+  tags:
+    - k3s-workers
