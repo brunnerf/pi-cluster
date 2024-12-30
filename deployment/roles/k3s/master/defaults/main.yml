@@ -1,4 +1,4 @@
 ---
-helm_version: v3.9.0
+helm_version: v3.16.4
 helm_url: https://get.helm.sh/helm-{{ helm_version }}-linux-arm.tar.gz
 helm_bin_dir: /usr/local/bin
