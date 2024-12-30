@@ -1,9 +1,13 @@
 
 - name: Install https dependencies
   apt:
-    name: ['apt-transport-https', 'ca-certificates', 'software-properties-common']
+    name: ['ca-certificates', 'software-properties-common']
+    update_cache: yes
     state: present
-    force: yes
+    allow_unauthenticated: yes
+  tags:
+    - apt
+
 
 #- name: Add Kubernetes Repo Key
 #  apt_key: url=https://packages.cloud.google.com/apt/doc/apt-key.gpg
@@ -23,9 +27,14 @@
     update_cache: yes
     autoremove: yes
     upgrade: yes
+  tags:
+    - apt
 
 - name: Install Packages
   apt:
     name: ['iperf', 'mtr-tiny', 'bridge-utils', 'socat', 'jq', 'vim', 'htop', 'python-pexpect-doc', 'haveged', 'python3-pip', 'git', 'iptables']
     force: yes
+    allow_unauthenticated: yes
     state: present
+  tags:
+    - apt
