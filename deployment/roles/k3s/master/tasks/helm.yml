@@ -26,5 +26,14 @@
 - name: Create HELM repository cache home /home/pi/.cache/helm/repository
   file: path="/home/{{ansible_user}}/.cache/helm/repository" state=directory mode=0777
 
+- name: Ignore PEP 668 because it's silly.
+  ansible.builtin.file:
+    path: /usr/lib/python3.11/EXTERNALLY-MANAGED
+    state: absent
+  tags:
+    - pip3-install
+
 - name: Install python yaml
   command: pip3 install pyyaml
+  tags:
+    - pip3-install
