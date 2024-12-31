@@ -184,7 +184,7 @@ spec:
     spec:
       containers:
         - name: kubernetes-dashboard
-          image: kubernetesui/dashboard:v2.5.0
+          image: kubernetesui/dashboard:v2.7.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9090
@@ -262,7 +262,7 @@ spec:
     spec:
       containers:
         - name: dashboard-metrics-scraper
-          image: kubernetesui/metrics-scraper:v1.0.7
+          image: kubernetesui/metrics-scraper:v1.0.8
           # reduce load of scraping
           #args:
           #  - --metric-resolution=3m0s
