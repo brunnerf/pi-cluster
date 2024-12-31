@@ -49,6 +49,11 @@
   when: mode == "master"
   tags: nfs
 
+- name: remove nfs-test
+  import_tasks: nfs-test-remove.yml
+  when: mode == "master"
+  tags: nfs-test
+
 - name: remove metalb
   import_tasks: metallb-remove.yml
   when: mode == "master"
